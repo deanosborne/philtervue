@@ -16,7 +16,12 @@
 <script>
 import AddImages from '@/components/AddImages.vue'
 export default {
-  name: 'add-image',
+  name: 'addImages',
+  computed: {
+    user () {
+      return this.$store.getters.isLoggedIn
+    }
+  },
   components: {
     AddImages
   }

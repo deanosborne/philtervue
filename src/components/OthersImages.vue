@@ -1,10 +1,10 @@
 <template>
-  <div class="row" v-if="othersImages">
+  <div class="row" v-if="OthersImages">
       <div class="col" v-if="errors">
           <div class="alert alert-danger">{{ errors }}</div>
       </div>
       <div id="others-images" class="card-columns">
-          <div class="card other" v-for="image in othersImages" v-bind:key="image">
+          <div class="card other" v-for="image in OthersImages" v-bind:key="image">
               <picture v-bind:id="'image' + image.id">
                   <img v-bind:src="image.image.path"  v-bind:alt="image.description"/>
               </picture>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'othersImages',
+  name: 'OthersImages',
   created () {
     this.fetchImages()
   },

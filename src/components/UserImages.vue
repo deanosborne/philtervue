@@ -1,29 +1,48 @@
-
+ <template>
+ <div class="container">
 <div class="row">
     <h2>Your Images</h2>
-    <p><a class="btn btn-primary text-center float-right" href="/image/add">Upload an Image Now</a></p>
+    <router-link tag="p" to="/image/add">
+    <a class="btn btn-primary text-center float-right">Upload an Image Now</a>
+    </router-link>
 </div>
-<div class="row">
-    {% flash %}
-        <p><div class="alert alert-{{ type == 'error' ? 'danger' : 'success' }}">{{ message }}</div></p>
-    {% endflash %}
-</div>
-<div class="row" v-if="userImages">
-    <p class="tags" v-if="image.tags"> Tags:
-        <a href="/image/tag/{{ tag }}" class="btn btn-primary btn-sm" v-for="tag in image.tags">{{ tag }} ({{ count }})</a>
-    </p>
-    <div id="my-images" class="grid" v-for="images in image">
-        {% for image in images %}
-        <div class="grid-item user" v-for="" >
-            <picture v-bind:id="image.image.id">
-                <img v-bind:src="image.image.path" v-bind:class="image.filter" v-bind:alt="image.description">
-            </picture>
-            <h5>{{ image.name }}</h5>
-            <p>{{ image.description }}</p>
-            <p><a href="/image?delete_image={{ image.id }}" class="btn btn-primary btn-sm">Delete</a></p>
-        </div>
-        {% endfor %}
-        <div class="clearfix"></div>
+<div v-for="image in userImages" :key="image.id" class="card other">
+        <picture v-bind:id="'image' + image.id" style='width:10%;height:10%;'>
+          <img v-bind:src = "image.image.path" v-bind:alt="image.description">
+        </picture>
+        <h5>{{ image.name }}</h5>
+        <p>{{ image.description }}</p>
+        <button class="btn btn-primary btn-sm" v-on:click="deleteImage(image)">
+          Delete this image</button>
+      </div>
+      <div class="clearfix"></div>
     </div>
-</div>
-{% endif %}
+</template>
+<script>
+export default {
+  name: 'userImages',
+  created () {
+    this.fetchImages()
+  },
+  data () {
+    return {
+      apiRequest: new this.$request(),
+      userImages: [],
+      errors: ''
+    }
+  },
+  methods: {
+    fetchImages () {
+      const endpoint = 'images'
+      this.apiRequest.get(endpoint)
+        .then((response) => {
+          this.userImages = response
+          this.errors = ''
+        })
+        .catch((errors) => {
+          this.errors = errors
+        })
+    }
+  }
+}
+</script>

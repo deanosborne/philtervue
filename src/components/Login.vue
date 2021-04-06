@@ -10,7 +10,7 @@
         <form @submit.prevent="OnLogin">
             <div class="form-group">
                 <label for="userSigninLogin">Email</label>
-                <input name="login" type="text" class="form-control" id="userSigninLogin" placeholder="Enter your email" v-model="apiRequest.login">
+                <input name="login" type="email" class="form-control" id="userSigninLogin" placeholder="Enter your email" v-model="apiRequest.login" required>
             </div>
             <div class="form-group">
                 <label for="userSigninPassword">Password</label>
