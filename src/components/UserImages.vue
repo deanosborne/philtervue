@@ -7,22 +7,39 @@
     </router-link>
 </div>
 <div v-for="image in userImages" :key="image.id" class="card other">
-        <picture v-bind:id="'image' + image.id" style='width:10%;height:10%;'>
-          <img v-bind:src = "image.image.path" v-bind:alt="image.description">
+        <picture v-bind:id="'image' + image.id">
+          <img v-bind:src = "image.image.path" v-bind:alt="image.description" style="width:25%;">
         </picture>
         <h5>{{ image.name }}</h5>
         <p>{{ image.description }}</p>
-        <button class="btn btn-primary btn-sm" v-on:click="deleteImage(image)">
-          Delete this image</button>
+        <p><button class="btn btn-primary text-center" v-on:click="deleteImage(image)">
+          Delete this image</button></p>
       </div>
       <div class="clearfix"></div>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'userImages',
+  computed: {
+    token () {
+      return this.$store.getters.getToken
+    }
+  },
   created () {
-    this.fetchImages()
+    // eslint-disable-next-line no-use-before-define
+    const token = token
+    axios
+      .get('http://test.me/api/v1/images/user',
+        { headers: { Authorization: `Bearer ${this.token}` } })
+      .then((response) => {
+        this.userImages = response.data
+        this.errors = ''
+      })
+      .catch((errors) => {
+        this.errors = errors
+      })
   },
   data () {
     return {
@@ -32,15 +49,18 @@ export default {
     }
   },
   methods: {
-    fetchImages () {
-      const endpoint = 'images'
-      this.apiRequest.get(endpoint)
+    deleteImage (image) {
+      axios
+        .delete('http://test.me/api/v1/users/delete/' + image.id,
+          { headers: { Authorization: `Bearer ${this.token}` } })
         .then((response) => {
-          this.userImages = response
+          this.userImages.splice(this.userImages.indexOf(image), 1)
+          this.successMessage = response.data
           this.errors = ''
         })
         .catch((errors) => {
           this.errors = errors
+          this.successMessage = ''
         })
     }
   }

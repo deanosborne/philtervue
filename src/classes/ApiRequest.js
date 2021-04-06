@@ -47,16 +47,6 @@ class ApiRequest {
     this.data = data
   }
 
-  addDataImage () {
-    const data = new FormData()
-    data.append('name', this.name)
-    data.append('description', this.description)
-    data.append('tags', this.tags)
-    data.append('filter', this.filter)
-    data.append('file', this.file)
-    Axios.post(this.url + 'addImage', data)
-  }
-
   /**
    * Reset the APIRequest fields.
    */
