@@ -55,7 +55,13 @@
             class="input-file" name="file" accept="image/*" required>
         </div>
         <input class="btn btn-primary" name="submit"  type ="submit" value="Submit">
-         <input type="hidden" name="_handler" value="addImage">
+        <input type="hidden" name="_handler" value="addImage">
+        <div class="row" v-if="errorMessage">
+        <div class="alert alert-danger">{{ errorMessage }}</div>
+        </div>
+        <div class="row" v-if="successMessage">
+        <div class="alert alert-success">{{ successMessage }}</div>
+        </div>
     </form>
   </div>
 </div>
@@ -91,6 +97,7 @@ export default {
         .then((response) => {
           this.successMessage = response
           this.errorMessage = ''
+          this.$router.push('/images')
         })
         .catch((errors) => {
           this.errorMessage = errors

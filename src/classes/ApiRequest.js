@@ -8,7 +8,7 @@ class ApiRequest {
    */
   constructor (data = false) {
     this.Axios = Axios
-    this.url = 'http://test.me/api/v1/'
+    this.url = 'http://it7744.module6.me/api/v1/'
     this.data = data
     this.store = false
 
@@ -114,7 +114,6 @@ class ApiRequest {
  */
   submitImage (requestType, endpoint) {
     return new Promise((resolve, reject) => {
-      console.log('token', this.headers.Authorization)
       this.Axios({
         method: requestType,
         url: this.url + endpoint,
@@ -129,7 +128,6 @@ class ApiRequest {
             this.storeToken(response.headers.authorization)
           }
           resolve(response.data)
-          console.log('upload response data >>>', response.data)
         })
         .catch((error) => {
           reject(error.message)
