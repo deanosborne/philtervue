@@ -14,12 +14,6 @@
         <p>{{ image.description }}</p>
         <p><button class="btn btn-primary text-center" v-on:click="deleteImage(image)">
           Delete this image</button></p>
-                  <div class="row" v-if="errorMessage">
-            <div class="alert alert-danger">{{ errorMessage }}</div>
-        </div>
-        <div class="row" v-if="successMessage">
-            <div class="alert alert-success">{{ successMessage }}</div>
-        </div>
       </div>
       <div class="clearfix"></div>
     </div>
