@@ -1,5 +1,11 @@
 <template>
   <div id="main">
+        <div class="row" v-if="errorMessage">
+        <div class="alert alert-danger">{{ errorMessage }}</div>
+        </div>
+        <div class="row" v-if="successMessage">
+        <div class="alert alert-success">{{ successMessage }}</div>
+        </div>
       <UserImages />
       <div id="others-images" class="container">
         <div class="row">
