@@ -1,6 +1,12 @@
 <template>
  <div class="container">
   <div class="row">
+      <div class="row" v-if="errorMessage">
+        <div class="alert alert-danger">{{ errorMessage }}</div>
+      </div>
+        <div class="row" v-if="successMessage">
+            <div class="alert alert-success">{{ successMessage }}</div>
+        </div>
     <form @submit.prevent="addImage"  enctype="multipart/form-data" v-show="token">
         <div class="form-group">
             <label>Name</label>
@@ -91,9 +97,10 @@ export default {
         .then((response) => {
           this.successMessage = response
           this.errorMessage = ''
+          this.$router.push('/image')
         })
         .catch((errors) => {
-          this.errorMessage = errors
+          this.errorMessage = 'Please try again'
           this.successMessage = ''
         })
     },

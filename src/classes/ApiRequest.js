@@ -114,7 +114,6 @@ class ApiRequest {
  */
   submitImage (requestType, endpoint) {
     return new Promise((resolve, reject) => {
-      console.log('token', this.headers.Authorization)
       this.Axios({
         method: requestType,
         url: this.url + endpoint,
@@ -129,7 +128,6 @@ class ApiRequest {
             this.storeToken(response.headers.authorization)
           }
           resolve(response.data)
-          console.log('upload response data >>>', response.data)
         })
         .catch((error) => {
           reject(error.message)

@@ -1,6 +1,12 @@
  <template>
  <div class="container">
 <div class="row">
+          <div class="row" v-if="errorMessage">
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+        </div>
+        <div class="row" v-if="successMessage">
+            <div class="alert alert-success">{{ successMessage }}</div>
+        </div>
     <h2>Your Images</h2>
     <router-link tag="p" to="/image/add">
     <a class="btn btn-primary text-center float-right">Upload an Image Now</a>
@@ -54,13 +60,14 @@ export default {
         .delete('http://test.me/api/v1/users/delete/' + image.id,
           { headers: { Authorization: `Bearer ${this.token}` } })
         .then((response) => {
-          //get the users image, splice at the index requested
+          // get the users image, splice at the index requested
           this.userImages.splice(this.userImages.indexOf(image), 1)
-          this.successMessage = response.data
+          this.successMessage = 'Success!'
           this.errors = ''
+          this.$router.push('/image')
         })
         .catch((errors) => {
-          this.errors = errors
+          this.errors = 'Please try again'
           this.successMessage = ''
         })
     }

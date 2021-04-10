@@ -52,9 +52,10 @@ export default {
         .then((response) => {
           this.successMessage = response
           this.errorMessage = ''
+          this.$router.push('/account')
         })
         .catch((errors) => {
-          this.errorMessage = errors
+          this.errorMessage = 'Please try again'
           this.successMessage = ''
         })
     }

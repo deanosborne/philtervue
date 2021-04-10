@@ -1,5 +1,11 @@
 <template>
 <div class="row">
+          <div class="row" v-if="errorMessage">
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+        </div>
+        <div class="row" v-if="successMessage">
+            <div class="alert alert-success">{{ successMessage }}</div>
+        </div>
         <form @submit.prevent="OnUpdate">
             <div class="form-group">
                 <label for="accountName">Full Name</label>
@@ -32,7 +38,7 @@ export default {
         password: '',
         password_confirmation: ''
       }),
-      errorMessage: '',
+      errorMessage: 'Not implemented, please go to home',
       successMessage: ''
     }
   },

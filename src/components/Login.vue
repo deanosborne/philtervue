@@ -42,7 +42,7 @@ export default {
           this.errorMessage = ''
         })
         .catch((errors) => {
-          this.errorMessage = errors
+          this.errorMessage = 'Please try again'
           this.successMessage = ''
         })
     }
