@@ -99,6 +99,7 @@ export default {
     },
     onFileSelected (event) {
       /* eslint-disable no-unused-vars */
+      // const gets the target file, can find information by console.log(image), then send the referenced file index in the api request
       const image = event.target.files[0]
       this.apiRequest.file = this.$refs.image.files[0]
     }

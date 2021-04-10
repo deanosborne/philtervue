@@ -54,6 +54,7 @@ export default {
         .delete('http://test.me/api/v1/users/delete/' + image.id,
           { headers: { Authorization: `Bearer ${this.token}` } })
         .then((response) => {
+          //get the users image, splice at the index requested
           this.userImages.splice(this.userImages.indexOf(image), 1)
           this.successMessage = response.data
           this.errors = ''

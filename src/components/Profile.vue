@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     OnUpdate () {
+      // Not implemented
       // this.apiRequest.addStore(this.$store)
       // this.apiRequest.post('onUpdate')
       //   .then((response) => {
